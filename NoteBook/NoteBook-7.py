@@ -262,9 +262,9 @@ class TemporalHetGNN(nn.Module):
         return ei, ea
 
     def encode(self, x_dict, ei_dict, ea_dict):
-        h = self.conv1(x_dict, ei_dict, edge_attr=ea_dict)
+        h = self.conv1(x_dict, ei_dict, edge_attr_dict=ea_dict)
         h = {"addr": self.drop(F.elu(self.bn1(h["addr"])))}
-        h = self.conv2(h, ei_dict, edge_attr=ea_dict)
+        h = self.conv2(h, ei_dict, edge_attr_dict=ea_dict)
         h = {"addr": self.drop(F.elu(self.bn2(h["addr"])))}
         return h["addr"]                              # (N_batch, hidden_ch)
 
